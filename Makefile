@@ -1,20 +1,7 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: snorth <marvin@42.fr>                      +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/03/01 15:55:43 by snorth            #+#    #+#              #
-#    Updated: 2017/03/13 21:24:10 by snorth           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME = libft.a
 
-NAME =		libft.a
-
-HEADER =	libft.h
-
-CFLAGS =	-c -Wall -Wextra -Werror
+CC := gcc
+CFLAGS	+= -Wall -Wextra -Werror
 
 CFILES =	ft_memset.c		ft_bzero.c		ft_memcpy.c		\
 			ft_memccpy.c	ft_memmove.c	ft_memchr.c		\
@@ -39,23 +26,41 @@ CFILES =	ft_memset.c		ft_bzero.c		ft_memcpy.c		\
 			ft_lstadd.c		ft_lstiter.c	ft_lstmap.c		\
 			ft_fmod.c		ft_realloc.c
 
-OFILES =	$(CFILES:.c=.o)
+ODIR = obj
 
-CC =		gcc
+SDIR = .
+
+SRC = $(addprefix $(SDIR)/,$(CFILES))
+
+OBJ = $(addprefix $(ODIR)/,$(CFILES:.c=.o))
+
+INC = .
+
+$(ODIR)/%.o: $(SDIR)/%.c
+	@$(CC) $(CFLAGS) -I $(INC) -c $^ -o $@
+	@/bin/echo -n "===="
 
 .PHONY: clean fclean re
 
 all: $(NAME)
 
-$(NAME):
-	@$(CC) $(CFLAGS) $(CFILES) -I $(HEADER)
-	@ar rc $(NAME) $(OFILES)
-	@ranlib $(NAME)
+$(NAME): $(OBJ)
+	@echo "\n\033[32m[object files created ( ͡° ͜ʖ ͡°)]\033[0m"
+	@ar rc $@ $(OBJ)
+	@ranlib $@
+	@echo "\033[32m[library $(NAME) created ( ͡° ͜ʖ ͡°)]\033[0m"
+
+$(OBJ): | $(ODIR)
+
+$(ODIR):
+	@mkdir $(ODIR)
 
 clean:
-	@/bin/rm -rf $(OFILES)
+	@rm -rf $(ODIR)
+	@echo "\033[31m[object files deleted (╯°□°）╯︵ ┻━┻ ]\033[0m"
 
 fclean: clean
-	@/bin/rm -f $(NAME)
+	@rm -rf $(NAME)
+	@echo "\033[31m[executable $(NAME) deleted ᕙ(⇀‸↼‶)ᕗ ]\033[0m"
 
 re: fclean all
