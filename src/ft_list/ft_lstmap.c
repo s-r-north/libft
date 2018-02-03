@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_list.h"
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
 	t_list	*first;
 	t_list	*new;
 
-	if (!f || !lst)
+	if (!f || lst == NULL)
 		return (NULL);
 	new = f(ft_lstnew(lst->content, lst->content_size));
 	first = new;

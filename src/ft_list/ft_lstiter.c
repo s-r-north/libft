@@ -10,14 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_list.h"
 
 void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {
-	if (lst == NULL)
+	if (!f)
 		return ;
-	if (f)
+	while (lst != NULL)
+	{
 		f(lst);
-	if ((lst = lst->next))
-		ft_lstiter(lst, f);
+		lst = lst->next
+	}
+	// if (lst == NULL)
+	// 	return ;
+	// if (f)
+	// 	f(lst);
+	// if ((lst = lst->next))
+	// 	ft_lstiter(lst, f);
 }

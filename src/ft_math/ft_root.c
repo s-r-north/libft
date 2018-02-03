@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_math.h"
 
 static double	delta(double nb, double rad, double ret)
 {
@@ -31,7 +31,7 @@ double			ft_root(double nb, int rad)
 	while (ret != lim)
 	{
 		lim = ret;
-		ret += delta(nb, (double)rad, ret);
+		ret += /*delta(nb, (double)rad, ret)*/ (1 / rad) * ((nb / ft_power(ret, rad - 1)) - ret);
 	}
 	ret = sign == -1 ? 1 / ret : ret;
 	return (ret);
