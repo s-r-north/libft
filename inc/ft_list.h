@@ -2,6 +2,8 @@
 # define FT_LIST_H
 
 #include <sys/types.h>
+#include <sys/_types/_null.h>
+#include <sys/malloc.h>
 
 typedef struct		s_list
 {

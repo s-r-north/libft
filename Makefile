@@ -61,8 +61,6 @@ OBJ := $(addprefix $(BIN_DIR)/,$(CTYPE_BIN) $(LIST_BIN) $(MATH_BIN) $(STDIO_BIN)
 
 INC := inc
 
-#fix this to get each directory to work
-
 $(BIN_DIR)/%.o: $(SOURCE_DIR)/%.c
 	@$(CC) $(CFLAGS) -I $(INC) -c $^ -o $@
 	@/bin/echo -n "===="
@@ -84,7 +82,7 @@ $(BIN_DIR):
 
 
 clean:
-	@rm -rf $(ODIR)
+	@rm -rf $(BIN_DIR)
 	@echo "\033[31m[object files deleted (╯°□°）╯︵ ┻━┻ ]\033[0m"
 
 fclean: clean
